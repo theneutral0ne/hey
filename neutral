@@ -12,12 +12,6 @@ if game.PlaceId == 14296179725 then
         PremiumOnly = false 
     })
     Tab:AddButton({
-        Name = "DevPlate",
-        Callback = function()
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(7215.33105, 1007.4173, 4819.90771, -0.9459005, -2.47641019e-08, 0.324456841, -5.05305575e-09, 1, 6.15934397e-08, -0.324456841, 5.66217686e-08, -0.9459005)
-        end    
-    })
-    Tab:AddButton({
         Name = "SakuraTown",
         Callback = function()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2928.2251, 1967.63184, -1298.02319, -0.9993608, 1.35618916e-09, -0.0357484184, -6.83149592e-10, 1, 5.70347467e-08, 0.0357484184, 5.70227137e-08, -0.9993608)
@@ -291,8 +285,6 @@ if game.PlaceId == 14296179725 then
                 loadstring(game:HttpGet("https://raw.githubusercontent.com/sinret/rbxscript.com-scripts-reuploads-/main/univ6", true))()
         end    
     })
-    workspace.DevplateByeBye:Destroy()
-    workspace.MistyByeBye:Destroy()
 else
     local Window = OrionLib:MakeWindow({Name = "universal", HidePremium = false, SaveConfig = false, ConfigFolder = "OrionTest"})
 
