@@ -1,10 +1,14 @@
+local TBINSERT = table.insert
+local V2 = Vector2.new
+local ROUND = math.round
+
+local RS = game:GetService("RunService")
 local Camera = workspace.CurrentCamera
 local To2D = Camera.WorldToViewportPoint
 local LocalPlayer = game.Players.LocalPlayer
 
 local Library = {};
 Library.__index = Library;
-
 
 function Library:NewLine(info)
 	local l = Drawing.new("Line")
@@ -16,7 +20,7 @@ function Library:NewLine(info)
 end
 
 function Library:Smoothen(v)
-	return Vector2.new(math.round(v.X), math.round(v.Y))
+	return V2(ROUND(v.X), ROUND(v.Y))
 end
 
 local Skeleton = {
@@ -46,7 +50,7 @@ function Skeleton:UpdateStructure()
 				continue;
 			end
 			
-			table.insert(
+			TBINSERT(
 				self.Lines,
 				{
 					Library:NewLine({
@@ -153,26 +157,24 @@ function Skeleton:Update()
 			local c0 = link.C0;
 			local c1 = link.C1;
 
-
 			local part0p, v1 = To2D(Camera, part0.CFrame.p);
 			local part0cp, v2 = To2D(Camera, (part0.CFrame * c0).p);
 			
 			if v1 and v2 then
-				l[1].From = Vector2.new(part0p.x, part0p.y);
-				l[1].To = Vector2.new(part0cp.x, part0cp.y);
+				l[1].From = V2(part0p.x, part0p.y);
+				l[1].To = V2(part0cp.x, part0cp.y);
 
 				l[1].Visible = true;
 			else 
 				l[1].Visible = false;
 			end
 			
-
 			local part1p, v3 = To2D(Camera, part1.CFrame.p);
 			local part1cp, v4 = To2D(Camera, (part1.CFrame * c1).p);
 		
 			if v3 and v4 then
-				l[2].From = Vector2.new(part1p.x, part1p.y);
-				l[2].To = Vector2.new(part1cp.x, part1cp.y);
+				l[2].From = V2(part1p.x, part1p.y);
+				l[2].To = V2(part1cp.x, part1cp.y);
 
 				l[2].Visible = true;
 			else 
@@ -183,8 +185,8 @@ function Skeleton:Update()
 			local part1p, v2 = To2D(Camera, part1.CFrame.p);
 			
 			if v1 and v2 then
-				l[1].From = Vector2.new(part0p.x, part0p.y);
-				l[1].To = Vector2.new(part1p.x, part1p.y);
+				l[1].From = V2(part0p.x, part0p.y);
+				l[1].To = V2(part1p.x, part1p.y);
 
 				l[1].Visible = true;
 			else 
@@ -207,7 +209,7 @@ function Skeleton:Toggle()
 		self:RemoveLines();
 		self:UpdateStructure();
 		
-		local c;c = game:GetService("RunService").Heartbeat:Connect(function()
+		local c;c = RS.Heartbeat:Connect(function()
 			if not self.Visible then
 				self:SetVisible(false);
 				c:Disconnect();
