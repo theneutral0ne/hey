@@ -2,11 +2,10 @@ local Camera = workspace.CurrentCamera
 local To2D = Camera.WorldToViewportPoint
 local LocalPlayer = game.Players.LocalPlayer
 
--- Only thing for now is Skeleton
 local Library = {};
 Library.__index = Library;
 
--- Functions
+
 function Library:NewLine(info)
 	local l = Drawing.new("Line")
 	l.Visible = info.Visible or true;
@@ -20,7 +19,6 @@ function Library:Smoothen(v)
 	return Vector2.new(math.round(v.X), math.round(v.Y))
 end
 
--- Skeleton Object
 local Skeleton = {
 	Removed = false;
 	Player = nil;
@@ -106,7 +104,6 @@ function Skeleton:SetDoSubsteps(State)
 	self.DoSubsteps = State;
 end
 
--- Main Update Loop
 function Skeleton:Update()
 	if self.Removed then
 		return;
@@ -156,7 +153,7 @@ function Skeleton:Update()
 			local c0 = link.C0;
 			local c1 = link.C1;
 
-			-- Center of part0 to c0
+
 			local part0p, v1 = To2D(Camera, part0.CFrame.p);
 			local part0cp, v2 = To2D(Camera, (part0.CFrame * c0).p);
 			
@@ -169,7 +166,7 @@ function Skeleton:Update()
 				l[1].Visible = false;
 			end
 			
-			-- Center of part1 to c1
+
 			local part1p, v3 = To2D(Camera, part1.CFrame.p);
 			local part1cp, v4 = To2D(Camera, (part1.CFrame * c1).p);
 		
@@ -235,7 +232,6 @@ function Skeleton:Remove()
 	self:RemoveLines();
 end
 
--- Create Skeleton Function
 function Library:NewSkeleton(Player, Visible, Color, Alpha, Thickness, DoSubsteps)
 	if not Player then
 		error("Missing Player argument (#1)")
@@ -267,4 +263,8 @@ function Library:NewSkeleton(Player, Visible, Color, Alpha, Thickness, DoSubstep
 	end
 
 	return s;
+end
+
+if true then
+	return Library;
 end
