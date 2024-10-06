@@ -1,0 +1,14 @@
+getgenv().farm = true
+while getgenv().farm == true do
+    for _,target in pairs(game:GetService("Players"):GetChildren()) do
+        task.wait()
+        if target.Character and target ~= game:GetService("Players").LocalPlayer then
+            if target.Character:FindFirstChild("Head") then 
+                if game:GetService("Players").LocalPlayer.Character:FindFirstChild("GunLocalNew") then
+                    print(target.Name)
+                    game:GetService("Players").LocalPlayer.Character.GunLocalNew.Shoot:FireServer(Vector3.new(1, 1, 1),{Vector3.new(1, 1, 1)},{target.Character:WaitForChild("Head")},{target.Character},math.huge,true,{["ImageSize"] = UDim2.new({0, 80}, {0, 80}),["Image"] = "rbxassetid://2855991319"},true,true,"AWP",0,0)
+                end
+            end
+        end
+    end
+end
