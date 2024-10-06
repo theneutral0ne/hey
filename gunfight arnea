@@ -2,8 +2,14 @@ local weapons = {}
 for _,v in pairs(game:GetService("ReplicatedStorage").Weapons:GetChildren()) do
     table.insert(weapons,v.Name)
 end
+local camos = {}
+for _,v in pairs(game:GetService("ReplicatedStorage").Camos:GetChildren()) do
+    table.insert(camos,v.Name)
+end
 local primary
 local secondary
+local primarycamo
+local secondarycamo
 local player = game:GetService("Players").LocalPlayer
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
@@ -35,7 +41,6 @@ local primaryDropdown = primaryTab:CreateDropdown({
 	Name = "item selector",
 	Options = weapons,
 	CurrentOption = weapons[1],
-    Flag = "Dropdown1",
 	Callback = function(Option)
 	  	primary = Option[1]
 	end,
@@ -48,6 +53,24 @@ local primarybutton = primaryTab:CreateButton({
 	end,
 })
 
+local primarySection2 = primaryTab:CreateSection("primary weapon camo changer")
+
+local primaryDropdown2 = primaryTab:CreateDropdown({
+	Name = "camo selector",
+	Options = camos,
+	CurrentOption = camos[1],
+	Callback = function(Option)
+	  	primarycamo = Option[1]
+	end,
+})
+
+local primarybutton2 = primaryTab:CreateButton({
+	Name = "equip camo",
+	Callback = function()
+		player:SetAttribute("PrimaryCamo",primarycamo)
+	end,
+})
+
 local secondaryTab = Window:CreateTab("secondary")
 
 local secondarySection = secondaryTab:CreateSection("secondary weapon changer")
@@ -56,7 +79,6 @@ local secondaryDropdown = secondaryTab:CreateDropdown({
     Name = "item selector",
     Options = weapons,
     CurrentOption = weapons[1],
-    Flag = "Dropdown2",
     Callback = function(Option)
         secondary = Option[1]
     end,
@@ -67,4 +89,23 @@ local secondarybutton = secondaryTab:CreateButton({
     Callback = function()
         player:SetAttribute("Secondary",secondary)
     end,
+})
+
+local secondarySection2 = secondaryTab:CreateSection("secondary weapon camo changer")
+
+local secondaryDropdown2 = secondaryTab:CreateDropdown({
+	Name = "camo selector",
+	Options = camos,
+	CurrentOption = camos[1],
+	Callback = function(Option)
+	  	secondarycamo = Option[1]
+        print(Option[1])
+	end,
+})
+
+local primarybutton2 = secondaryTab:CreateButton({
+	Name = "equip camo",
+	Callback = function()
+		player:SetAttribute("SecondaryCamo",secondarycamo)
+	end,
 })
