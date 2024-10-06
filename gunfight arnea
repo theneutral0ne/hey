@@ -1,0 +1,70 @@
+local weapons = {}
+for _,v in pairs(game:GetService("ReplicatedStorage").Weapons:GetChildren()) do
+    table.insert(weapons,v.Name)
+end
+local primary
+local secondary
+local player = game:GetService("Players").LocalPlayer
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+	Name = "Gunfight arena give items",
+	LoadingTitle = "Gunfight arena give items",
+	LoadingSubtitle = "by Neutral",
+	ConfigurationSaving = {
+		Enabled = false,
+		FolderName = "Rayfield Interface Suite",
+		FileName = "Big Hub"
+	},
+	KeySystem = false, -- Set this to true to use their key system
+	KeySettings = {
+		Title = "Sirius Hub",
+		Subtitle = "Key System",
+		Note = "Join the discord (discord.gg/sirius)",
+		SaveKey = true,
+		Key = "ABCDEF"
+	}
+})
+
+
+local primaryTab = Window:CreateTab("primary") -- Title, Image
+
+local primarySection = primaryTab:CreateSection("primary weapon changer")
+
+local primaryDropdown = primaryTab:CreateDropdown({
+	Name = "item selector",
+	Options = weapons,
+	CurrentOption = weapons[1],
+    Flag = "Dropdown1",
+	Callback = function(Option)
+	  	primary = Option[1]
+	end,
+})
+
+local primarybutton = primaryTab:CreateButton({
+	Name = "equip item",
+	Callback = function()
+		player:SetAttribute("Primary",primary)
+	end,
+})
+
+local secondaryTab = Window:CreateTab("secondary")
+
+local secondarySection = secondaryTab:CreateSection("secondary weapon changer")
+
+local secondaryDropdown = secondaryTab:CreateDropdown({
+    Name = "item selector",
+    Options = weapons,
+    CurrentOption = weapons[1],
+    Flag = "Dropdown2",
+    Callback = function(Option)
+        secondary = Option[1]
+    end,
+})
+
+local secondarybutton = secondaryTab:CreateButton({
+    Name = "equip item", 
+    Callback = function()
+        player:SetAttribute("Secondary",secondary)
+    end,
+})
