@@ -1,4 +1,4 @@
-local UIS = game:GetService("UserInputService") 
+
 local player = game:GetService("Players").LocalPlayer
 local hId
 local position
@@ -79,6 +79,8 @@ task.spawn(function()
                 player.Character.GreatSword.SwordScript.FGS:FireServer(player.Character.PrimaryPart.Position + (player.Character.PrimaryPart.CFrame.LookVector*100))
             elseif player.Character:FindFirstChild("Bow") then
                 player.Character.Bow.SwordScript.Shoot:FireServer(player.Character.PrimaryPart.Position + (player.Character.PrimaryPart.CFrame.LookVector*100),21)
+            elseif player.Character:FindFirstChild("PickAxe") then
+                game:GetService("Players").LocalPlayer.Character.PickAxe.SwordScript.Activate:FireServer()
             end
         end
 
@@ -105,13 +107,8 @@ Toggles.AutoFish:OnChanged(function()
             if player.Character:FindFirstChild("HumanoidRootPart") then
                 findF()
                 if hId then
-                    game:GetService("Players").LocalPlayer.PlayerGui.Parkour.Script.Fish:FireServer("LobsterCage",hId)
-                    game:GetService("Players").LocalPlayer.PlayerGui.Fish.isFishing.Value = true
-                    task.wait(0.5)
+                    task.wait(2.25)
                     game:GetService("Players").LocalPlayer.PlayerGui.Fish.Ado.catch:FireServer(hId)
-                    task.wait(0.5)
-                    game:GetService("Players").LocalPlayer.PlayerGui.Parkour.Script.Fish:FireServer("Stop") 
-                    task.wait(0.5)
                 end
             end
         end
