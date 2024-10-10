@@ -31,7 +31,6 @@ local Window = Library:CreateWindow({
 })
 
 local Tabs = {
-    -- Creates a new tab titled Main
     Main = Window:AddTab('Main'),
     ['UI Settings'] = Window:AddTab('UI Settings'),
 }
@@ -68,6 +67,8 @@ task.spawn(function()
                 player.Character.Bow.SwordScript.Shoot:FireServer(player.Character.PrimaryPart.Position + (player.Character.PrimaryPart.CFrame.LookVector*100),21)
             elseif player.Character:FindFirstChild("PickAxe") then
                 game:GetService("Players").LocalPlayer.Character.PickAxe.SwordScript.Activate:FireServer()
+            elseif player.Character:FindFirstChild("CursedHammer") then
+                game:GetService("Players").LocalPlayer.Character.CursedHammer.SwordScript.Activate:FireServer(player.Character.PrimaryPart.Position + (player.Character.PrimaryPart.CFrame.LookVector*100))
             end
         end
 
@@ -75,13 +76,11 @@ task.spawn(function()
     end
 end)
 
-
-
 local RightGroupbox = Tabs.Main:AddRightGroupbox('Toggles');
 
 RightGroupbox:AddToggle('AutoFish', {
     Text = 'Autofish',
-    Default = false, -- Default value (true / false)
+    Default = false,
     Tooltip = 'toggles autofish on/off',
 
     Callback = function(Value)
@@ -104,7 +103,7 @@ end)
 
 RightGroupbox:AddToggle('AutoPickup', {
     Text = 'Auto Pickup',
-    Default = false, -- Default value (true / false)
+    Default = false,
     Tooltip = 'toggles Auto Pickup on/off',
 
     Callback = function(Value)
@@ -126,7 +125,7 @@ end)
 
 RightGroupbox:AddToggle('AutoCounter', {
     Text = 'AutoCounter',
-    Default = false, -- Default value (true / false)
+    Default = false,
     Tooltip = 'toggles AutoCounter on/off',
 
     Callback = function(Value)
@@ -142,7 +141,7 @@ end)
 
 RightGroupbox:AddToggle('SemiGod', {
     Text = 'Semi Godmode',
-    Default = false, -- Default value (true / false)
+    Default = false, 
     Tooltip = 'toggles Semi Godmode on/off',
 
     Callback = function(Value)
@@ -155,7 +154,6 @@ Toggles.SemiGod:OnChanged(function()
         game:GetService("Players").LocalPlayer.PlayerGui.Parkour.Script.iFrame:FireServer()
     end
 end)
-
 Library:SetWatermarkVisibility(true)
 
 
@@ -187,10 +185,8 @@ Library:OnUnload(function()
     Library.Unloaded = true
 end)
 
--- UI Settings
 local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
 
--- I set NoUI so it does not show up in the keybinds menu
 MenuGroup:AddButton('Unload', function() Library:Unload() end)
 MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'End', NoUI = true, Text = 'Menu keybind' })
 
