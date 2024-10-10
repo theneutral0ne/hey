@@ -69,6 +69,11 @@ task.spawn(function()
                 game:GetService("Players").LocalPlayer.Character.PickAxe.SwordScript.Activate:FireServer()
             elseif player.Character:FindFirstChild("CursedHammer") then
                 game:GetService("Players").LocalPlayer.Character.CursedHammer.SwordScript.Activate:FireServer(player.Character.PrimaryPart.Position + (player.Character.PrimaryPart.CFrame.LookVector*100))
+            elseif player.Character:FindFirstChild("DivineBlade") then
+                game:GetService("Players").LocalPlayer.Character.DivineBlade.SwordScript.Activate:FireServer()
+            elseif player.Character:FindFirstChild("LightningRod") then
+                game:GetService("Players").LocalPlayer.PlayerGui.Parkour.Script.LightningRod:FireServer()
+                game:GetService("Players").LocalPlayer.PlayerGui.Parkour.Script.UpdateMouse:FireServer(player.Character.PrimaryPart.Position + (player.Character.PrimaryPart.CFrame.LookVector*100))
             end
         end
 
@@ -98,6 +103,22 @@ Toggles.AutoFish:OnChanged(function()
                 end
             end
         end
+    end
+end)
+
+RightGroupbox:AddToggle('Autolob', {
+    Text = 'Auto cook lobsters',
+    Default = false,
+    Tooltip = 'toggles Auto cook lobsters on/off',
+
+    Callback = function(Value)
+    end
+})
+
+Toggles.Autolob:OnChanged(function()
+    while Toggles.Autolob.Value do
+        task.wait(0.1)
+        game:GetService("Players").LocalPlayer.PlayerGui.Parkour.Script.CookDish:InvokeServer("RawLobster")
     end
 end)
 
